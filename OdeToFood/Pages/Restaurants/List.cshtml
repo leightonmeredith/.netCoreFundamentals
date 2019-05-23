@@ -34,6 +34,11 @@
                 <td>@restaurant.Name</td>
                 <td>@restaurant.Location</td>
                 <td>@restaurant.Type</td>
+                <td>
+                    <a class="btn btn-lg" asp-page="./Detail" asp-route-restauranteId="@restaurant.Id">
+                        <i class="glyphicon glyphicon-zoom-in"></i>
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
