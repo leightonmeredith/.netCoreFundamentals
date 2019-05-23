@@ -6,7 +6,27 @@
 
 <h2>List</h2>
 
-@Model.Msg
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Cuisine</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var restaurant in Model.Restaurants)
+        {
+            <tr>
+                <td>@restaurant.Name</td>
+                <td>@restaurant.Location</td>
+                <td>@restaurant.Type</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>@Model.Msg</div>
 
 
 
