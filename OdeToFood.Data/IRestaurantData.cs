@@ -8,6 +8,8 @@ namespace OdeToFood.Data
     {
         IEnumerable<Restaurant> GetRestaurantByName(string name);
         Restaurant GetById(int id);
+        Restaurant Update(Restaurant updatedRestaurant);
+        int Commit();
     }
 
     public class InMemoryRestaurantData : IRestaurantData
@@ -35,6 +37,24 @@ namespace OdeToFood.Data
         public Restaurant GetById(int id)
         {
             return restaurants.SingleOrDefault(r => r.Id == id);
+        }
+
+        public Restaurant Update(Restaurant updatedRestaurant)
+        {
+            var restaurant = restaurants.SingleOrDefault(r => r.Id == updatedRestaurant.Id);
+            if (restaurant != null)
+            {
+                restaurant.Name = updatedRestaurant.Name;
+                restaurant.Location = updatedRestaurant.Location;
+                restaurant.Type = updatedRestaurant.Type;
+            }
+            return restaurant;
+        }
+
+        public int Commit()
+        {
+            //doesn't mean much until we have a datasource
+            return 0;
         }
     }
 }
