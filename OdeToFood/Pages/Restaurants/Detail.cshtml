@@ -6,6 +6,9 @@
     ViewData["Title"] = "Detail";
 }
 
+<a class="btn btn-lg" asp-page="./Edit" asp-route-restaurantId="@Model.Restaurant.Id">
+    <i class="glyphicon glyphicon-edit"></i>
+</a>
 <h2>@Model.Restaurant.Name</h2>
 <div>
     ID: @Model.Restaurant.Id
@@ -17,7 +20,9 @@
     Cuisine: @Model.Restaurant.Type
 </div>
 
-<a class="btn btn-lg" asp-page="./Edit" asp-route-restaurantId="@Model.Restaurant.Id">
-    <i class="glyphicon glyphicon-edit"></i>
-</a>
+@if (Model.Message != null)
+{
+    <div class="alert alert-info">@Model.Message</div>
+}
+
 <a asp-page="./List" class="btn btn-default">All Restaurant</a>

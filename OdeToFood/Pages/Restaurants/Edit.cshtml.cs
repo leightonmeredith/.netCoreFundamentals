@@ -28,7 +28,7 @@ namespace OdeToFood.Pages.Restaurants
             if (restaurantId.HasValue)
             {
 
-            Restaurant = _restaurantData.GetById(restaurantId.Value);
+                Restaurant = _restaurantData.GetById(restaurantId.Value);
             }
             else
             {
@@ -44,17 +44,31 @@ namespace OdeToFood.Pages.Restaurants
 
         public IActionResult OnPost()
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                Restaurant = _restaurantData.Update(Restaurant);
-                _restaurantData.Commit();
-                return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
+                Cuisines = _htmlHelper.GetEnumSelectList<CuisineType>(); //must add because .net is stateless
+
+
+                return Page();
             }
 
-            Cuisines = _htmlHelper.GetEnumSelectList<CuisineType>(); //must add because .net is stateless
+            if (Restaurant.Id > 0)
+            {
 
+                Restaurant = _restaurantData.Update(Restaurant);
+            }
+            else
+            {
+                Restaurant = _restaurantData.Add(Restaurant);
+            }
+            _restaurantData.Commit();
 
-            return Page();
+            //temp data goes away so no need to clean up. 
+            //On next request any page can get this message
+            //...unless it's in cshtml
+            TempData["Message"] = "Restaurant saved!"; 
+
+            return RedirectToPage("./Detail", new { restaurantId = Restaurant.Id });
         }
     }
 }

@@ -56,6 +56,8 @@ namespace OdeToFood.Data
         {
             //var newRestaurant = new Restaurant();
             restaurants.Add(newRestaurant);
+
+            //Only use in test/dev. Id is generated automatically on db
             newRestaurant.Id = restaurants.Max(r => r.Id) + 1;
             return newRestaurant;
         }
