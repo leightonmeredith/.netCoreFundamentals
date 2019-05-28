@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OdeToFood.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OdeToFood.Data
 {
-    public class OdeToFoodDbContext: DbContext
+    public class OdeToFoodDbContext : DbContext
     {
+        //dotnet ef migrations add initCreate -s..\OdeToFood\OdeToFood.csproj
+        //dotnet ef dbcontext info -s..\OdeToFood\OdeToFood.csproj
+
         //options 4wd to DbContext base class; nothing to do with it here
         public OdeToFoodDbContext(DbContextOptions<OdeToFoodDbContext> options)
             : base(options)
