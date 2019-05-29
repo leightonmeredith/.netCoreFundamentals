@@ -27,8 +27,11 @@ namespace OdeToFood
                 options.UseSqlServer(Configuration.GetConnectionString("OdeToFoodDb"));
             });
 
-            // Not to be done in dev/test... NOT PRODUCTION (See: Data curruption)
-            services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            // DEV/TEST ONLY... NOT PRODUCTION (See: Data curruption)
+            //services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
+            
+            //USE IN PRODUCTION
+            services.AddScoped<IRestaurantData, SqlRestaurantData>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
