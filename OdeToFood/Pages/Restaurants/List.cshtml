@@ -1,7 +1,7 @@
 ﻿@page
 @model ListModel
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "Restaurants";
 }
 
 <h2>Restaurants</h2>
@@ -19,40 +19,15 @@
     </div>
 </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Cuisine</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var restaurant in Model.Restaurants)
-        {
-            <tr>
-                <td>@restaurant.Name</td>
-                <td>@restaurant.Location</td>
-                <td>@restaurant.Type</td>
-                <td>
-                    <a class="btn btn-lg" asp-page="./Detail" asp-route-restaurantId="@restaurant.Id">
-                        <i class="glyphicon glyphicon-zoom-in"></i>
-                    </a>
-                    <a class="btn btn-lg" asp-page="./Edit" asp-route-restaurantId="@restaurant.Id">
-                        <i class="glyphicon glyphicon-edit"></i>
-                    </a>
-                    <a class="btn btn-lg" asp-page="./Delete" asp-route-restaurantId="@restaurant.Id">
-                        <i class="glyphicon glyphicon-trash"></i>
-                    </a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@foreach (var restaurant in Model.Restaurants)
+{
+    <partial name="_Summary" model="restaurant" />
+}
+<a class="btn btn-lg" asp-page="./Edit">
+    <i class="btn btn-primary">New</i>
+</a>
 
-<a asp-page="./Edit" class="btn btn-primary">New</a>
-
-@section footer{ 
+@section footer{
     <div>@Model.Msg</div>
 }
 
