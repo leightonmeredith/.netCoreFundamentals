@@ -29,7 +29,7 @@ namespace OdeToFood
 
             // DEV/TEST ONLY... NOT PRODUCTION (See: Data curruption)
             //services.AddSingleton<IRestaurantData, InMemoryRestaurantData>();
-            
+
             //USE IN PRODUCTION
             services.AddScoped<IRestaurantData, SqlRestaurantData>();
 
@@ -57,12 +57,30 @@ namespace OdeToFood
                 app.UseHsts();
             }
 
+            //Depends where you put the middleware
+            app.Use(SayHelloMiddleWare);
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseNodeModules(env);
             app.UseCookiePolicy();
 
             app.UseMvc();
+        }
+
+        private RequestDelegate SayHelloMiddleWare(RequestDelegate arg)
+        {
+            return async ctx =>
+            {
+                if (ctx.Request.Path.StartsWithSegments("/hey"))
+                {
+                    await ctx.Response.WriteAsync("Hey");
+                }
+                else
+                {
+                    await arg(ctx);
+                }
+            };
         }
     }
 }
